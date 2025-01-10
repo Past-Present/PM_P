@@ -7,5 +7,5 @@ import HelloReact from './components/hello';
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = createRoot(document.getElementById('react-root'));
-  root.render(<HelloReact />);
+  // root.render(<HelloReact />);
 });
