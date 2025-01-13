@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
+import { useLocation } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -83,6 +84,8 @@ const NavBar = ({ content }: { content: React.ReactNode }) => {
   const [open, setOpen] = useState(false);
   const [listOpen, setListOpen] = useState(false);
 
+  const location = useLocation();
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -94,6 +97,19 @@ const NavBar = ({ content }: { content: React.ReactNode }) => {
   const handleClick = () => {
     setListOpen(!listOpen);
   };
+
+  const getTitle = (pathname: string) => {
+    switch (pathname) {
+      case '/projects':
+        return '所有專案';
+      case '/talent_pool':
+        return '人力資料庫';
+      default:
+        return '首頁';
+    }
+  };
+
+  const title = getTitle(location.pathname);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -121,7 +137,7 @@ const NavBar = ({ content }: { content: React.ReactNode }) => {
             component="div"
             sx={{color: 'white'}}
           >
-            所有專案
+            {title}
           </Typography>
         </Toolbar>
       </AppBar>

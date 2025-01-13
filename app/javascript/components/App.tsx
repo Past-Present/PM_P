@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import ProjectsPage from "./page/ProjectPage";
 import NavBar from "./shared/NavBar";
-
+import TalentPoolPage from "./page/TalentPoolPage"
 const App = () => {
   const theme = createTheme({
     palette: {
@@ -22,6 +22,7 @@ const App = () => {
           content={
             <Routes>
               <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/talent_pool" element={<TalentPoolPage />} />
             </Routes>
           }
         />
