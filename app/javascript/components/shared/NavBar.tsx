@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -79,7 +79,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-const NavBar = ({ content }: { content: React.ReactNode }) => {
+const NavBar = ({ content, projectId }: { content: React.ReactNode, projectId: string | null }) => {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [listOpen, setListOpen] = useState(false);
@@ -98,18 +98,19 @@ const NavBar = ({ content }: { content: React.ReactNode }) => {
     setListOpen(!listOpen);
   };
 
-  const getTitle = (pathname: string) => {
-    switch (pathname) {
-      case '/projects':
-        return '所有專案';
-      case '/talent_pool':
-        return '人力資料庫';
-      default:
-        return '首頁';
+  const getTitle = () => {
+    if (location.pathname.includes('/projects/') && projectId) {
+      return projectId;
     }
+    if (location.pathname === '/talent_pool') {
+      return '人力資料庫';
+    }
+    return '所有專案';
   };
 
-  const title = getTitle(location.pathname);
+
+  const title = getTitle();
+  const Projects = [ "專案A", "專案B", "專案C" ]
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -165,18 +166,36 @@ const NavBar = ({ content }: { content: React.ReactNode }) => {
           component="nav"
           aria-labelledby="nested-list-subheader"
         >
-          <ListItemButton onClick={handleClick}>
+          <ListItemButton
+            component={Link}
+            to="projects"
+          >
             <ListItemText primary="所有專案" />
+          </ListItemButton>
+          <ListItemButton onClick={handleClick}>
+            <ListItemText primary="專案列表" />
             {listOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={listOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Starred" />
-              </ListItemButton>
+            {
+              Projects.map((project, index) => (
+                <ListItemButton
+                  key={index}
+                  sx={{ pl: 4 }}
+                  component={Link}
+                  to={`/projects/${project}`}
+                >
+                  <ListItemText primary={project} />
+                </ListItemButton>
+              ))
+            }
             </List>
           </Collapse>
-          <ListItemButton>
+          <ListItemButton
+            component={Link}
+            to="talent_pool"
+          >
             <ListItemText primary="人力資料庫" />
           </ListItemButton>
         </List>

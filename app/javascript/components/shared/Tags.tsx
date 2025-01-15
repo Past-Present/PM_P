@@ -12,14 +12,13 @@ const Tag = styled('div')(({ backgroundColor }: { backgroundColor: string }) => 
   fontWeight: 400,
   lineHeight: '32px',
   whiteSpace: 'nowrap',
-  margin: '4px',
   cursor: 'default',
 }));
 
 const TagContainer = styled('div')({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '8px',
+  gap: '4px',
   maxWidth: '130px',
   width: '130px'
 });
@@ -37,14 +36,23 @@ const backgroundColors: { [key: string]: string } = {
   '背景': '#f8bbd0',
 };
 
-const Tags = ({ positions }: { positions: string[] }) => (
-  <TagContainer>
-    {positions.map((position) => (
-      <Tag key={position} backgroundColor={backgroundColors[position] || '#e0e0e0'}>
-        {position}
-      </Tag>
-    ))}
-  </TagContainer>
-);
+const Tags = ({ positions }: { positions: string[] }) => {
+  return (
+    <TagContainer>
+      {
+        positions.length > 0 ? (
+          positions.map((position) => (
+            <Tag key={position} backgroundColor={backgroundColors[position] || '#e0e0e0'}>
+              {position}
+            </Tag>
+          ))
+        ) : (
+          <Tag backgroundColor="#f3f3f3">無資料</Tag>
+        )
+      }
+    </TagContainer>
+  )
+};
+
 
 export default Tags

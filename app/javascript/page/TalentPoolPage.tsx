@@ -7,10 +7,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Buttons from "../shared/Buttons";
+import Buttons from "../components/Shared/Buttons";
 import AddIcon from '@mui/icons-material/Add';
-import Selected from '../shared/Selected'
-import Tags from '../shared/Tags'
+import Selected from '../components/Shared/Selected'
+import Tags from '../components/Shared/Tags'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -52,11 +54,11 @@ const TalentPoolPage = () => {
       "projects": [
         {
           "name": "專案A",
-          "position": "角色動畫設計"
+          "position": ["動畫"]
         },
         {
-          "name": "專案B",
-          "position": "特效動畫製作"
+          "name": "專案C",
+          "position": ["後製"]
         }
       ],
       "SWIT_code": "TWNB1234",
@@ -78,11 +80,11 @@ const TalentPoolPage = () => {
       "projects": [
         {
           "name": "專案A",
-          "position": "角色動畫設計"
+          "position": ["動畫", "上色"]
         },
         {
           "name": "專案B",
-          "position": "特效動畫製作"
+          "position": ["補間"]
         }
       ],
       "SWIT_code": "TWNB1234",
@@ -90,6 +92,8 @@ const TalentPoolPage = () => {
       "address": "台北市中正區和平西路一段100號"
     }
   ]
+
+  const Projects = [ "專案A", "專案B", "專案C" ]
 
   return (
     <div>
@@ -108,11 +112,16 @@ const TalentPoolPage = () => {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>姓名</StyledTableCell>
+            <StyledTableCell align="left"></StyledTableCell>
+            <StyledTableCell align="left">姓名</StyledTableCell>
             <StyledTableCell align="left">Credit 顯示姓名</StyledTableCell>
             <StyledTableCell align="left">建議職位</StyledTableCell>
             <StyledTableCell align="left">期望職位</StyledTableCell>
-            <StyledTableCell align="left">專案A</StyledTableCell>
+            {
+              Projects.map((project, index) => (
+                <StyledTableCell key={index} align="left">{project}</StyledTableCell>
+              ))
+            }
             <StyledTableCell align="left">Discord</StyledTableCell>
             <StyledTableCell align="left">Instagram</StyledTableCell>
             <StyledTableCell align="left">戶名</StyledTableCell>
@@ -126,15 +135,33 @@ const TalentPoolPage = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {datas.map((data) => (
-            <StyledTableRow key={data.id}>
+          {
+            datas.map((data) => (
+              <StyledTableRow key={data.id}>
+              <StyledTableCell align="left">{<><EditIcon /><DeleteForeverIcon /></> }</StyledTableCell>
               <StyledTableCell component="th" scope="row">
                 {data.name}
               </StyledTableCell>
               <StyledTableCell align="left">{data.credit_name}</StyledTableCell>
-              <StyledTableCell align="left">{<Selected  positionName={["導演"]}/>}</StyledTableCell>
-              <StyledTableCell align="left">{<Selected  positionName={["導演"]}/>}</StyledTableCell>
-              <StyledTableCell align="left">{<Tags positions={["導演", "動畫"]}/>}</StyledTableCell>
+              <StyledTableCell align="left">{<Selected positionName={["導演"]}/>}</StyledTableCell>
+              <StyledTableCell align="left">{<Selected positionName={["導演"]}/>}</StyledTableCell>
+              {
+                Projects.map((project, index) => {
+                  const projectData = data.projects.find((p) => p.name === project);
+                  return (
+                    <StyledTableCell
+                      key={index}
+                      align="left"
+                      sx={{
+                        whiteSpace: 'normal',
+                        wordBreak: 'break-word',
+                        padding: '8px',
+                      }}
+                    >
+                      <Tags positions={projectData?.position || []} />                    </StyledTableCell>
+                  );
+                })
+              }
               <StyledTableCell align="left">{data.discord}</StyledTableCell>
               <StyledTableCell align="left">{data.instagram}</StyledTableCell>
               <StyledTableCell align="left">{data.name}</StyledTableCell>
