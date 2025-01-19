@@ -4,6 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import AnnouncementPage from "../components/Projects/AnnouncementPage"
+import MemberPage from "../components/Projects/MemberPage"
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -65,7 +66,6 @@ const ProjectDetailPage = ({ setCurrentProjectId }: { setCurrentProjectId: (id: 
           <Tab label="成員" {...a11yProps(2)} />
           <Tab label="預算" {...a11yProps(3)} />
           <Tab label="出款" {...a11yProps(4)} />
-
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -75,7 +75,7 @@ const ProjectDetailPage = ({ setCurrentProjectId }: { setCurrentProjectId: (id: 
         Item Two
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Item Three
+        <MemberPage />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
         Item Three

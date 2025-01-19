@@ -1,44 +1,15 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import React from 'react';
+import CustomTable from '../components/Projects/CustomTable';
+import Selected from '../components/Shared/Selected';
+import Tags from '../components/Shared/Tags';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Buttons from "../components/Shared/Buttons";
 import AddIcon from '@mui/icons-material/Add';
-import Selected from '../components/Shared/Selected'
-import Tags from '../components/Shared/Tags'
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import EditIcon from '@mui/icons-material/Edit';
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: "#80A4AE",
-    color: theme.palette.common.white,
-    whiteSpace: "nowrap"
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  '&:last-child td, &:last-child th': {
-    border: 0,
-  },
-}));
+import IconButton from '@mui/material/IconButton';
 
 const TalentPoolPage = () => {
-  const datas = [
+  const data = [
     {
       "id": "1",
       "name": "張小明",
@@ -61,9 +32,9 @@ const TalentPoolPage = () => {
           "position": ["後製"]
         }
       ],
-      "SWIT_code": "TWNB1234",
-      "IBAN_code": "TW123456789012345678",
-      "address": "台北市中正區和平西路一段100號"
+        "SWIT_code": "TWNB1234",
+        "IBAN_code": "TW123456789012345678",
+        "address": "台北市中正區和平西路一段100號"
     },
     {
       "id": "2",
@@ -93,7 +64,63 @@ const TalentPoolPage = () => {
     }
   ]
 
-  const Projects = [ "專案A", "專案B", "專案C" ]
+  const projects = ["專案A", "專案B", "專案C"];
+
+  interface Project {
+    name: string;
+    position: string[];
+  }
+
+  interface TalentData {
+    id: string;
+    name: string;
+    credit_name: string;
+    discord: string;
+    instagram: string;
+    projects: Project[];
+    account_name: string;
+    bank_name: string;
+    bank_code: string;
+    branch: string;
+    account_number: string;
+    SWIT_code: string;
+    IBAN_code: string;
+    address: string;
+  }
+
+  const columns = [
+    { label: '', render: (row: TalentData) =>
+      <>
+        <IconButton size="small" aria-label="delete">
+          <DeleteForeverIcon />
+        </IconButton>
+        <IconButton size="small" aria-label="edit">
+          <EditIcon />
+        </IconButton>
+      </>
+    },
+    { label: '姓名', field: 'name' },
+    { label: 'Credit 顯示姓名', field: 'credit_name' },
+    { label: '建議職位', render: () => <Selected positionName={["導演"]} /> },
+    { label: '期望職位', render: () => <Selected positionName={["導演"]} /> },
+    ...projects.map((project) => ({
+      label: project,
+      render: (row: TalentData) => {
+        const projectData = row.projects.find((p) => p.name === project);
+        return <Tags positions={projectData?.position || []} />;
+      },
+    })),
+    { label: 'Discord', field: 'discord' },
+    { label: 'Instagram', field: 'instagram' },
+    { label: '戶名', field: 'account_name' },
+    { label: '銀行', field: 'bank_name' },
+    { label: '銀行代號', field: 'bank_code' },
+    { label: '分行', field: 'branch' },
+    { label: '帳號', field: 'account_number' },
+    { label: 'SWIT', field: 'SWIT_code' },
+    { label: 'IBAN', field: 'IBAN_code' },
+    { label: '地址', field: 'address' },
+  ];
 
   return (
     <div>
@@ -107,78 +134,13 @@ const TalentPoolPage = () => {
           }
           contained={true}
         />
+      {/* <CustomTable columns={columns} data={data} />; */}
       </div>
-      <TableContainer sx={{  marginTop: 8}} component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="left"></StyledTableCell>
-            <StyledTableCell align="left">姓名</StyledTableCell>
-            <StyledTableCell align="left">Credit 顯示姓名</StyledTableCell>
-            <StyledTableCell align="left">建議職位</StyledTableCell>
-            <StyledTableCell align="left">期望職位</StyledTableCell>
-            {
-              Projects.map((project, index) => (
-                <StyledTableCell key={index} align="left">{project}</StyledTableCell>
-              ))
-            }
-            <StyledTableCell align="left">Discord</StyledTableCell>
-            <StyledTableCell align="left">Instagram</StyledTableCell>
-            <StyledTableCell align="left">戶名</StyledTableCell>
-            <StyledTableCell align="left">銀行</StyledTableCell>
-            <StyledTableCell align="left">銀行代號</StyledTableCell>
-            <StyledTableCell align="left">分行</StyledTableCell>
-            <StyledTableCell align="left">帳號</StyledTableCell>
-            <StyledTableCell align="left">SWIT</StyledTableCell>
-            <StyledTableCell align="left">IBAN</StyledTableCell>
-            <StyledTableCell align="left">地址</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {
-            datas.map((data) => (
-              <StyledTableRow key={data.id}>
-              <StyledTableCell align="left">{<><EditIcon /><DeleteForeverIcon /></> }</StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                {data.name}
-              </StyledTableCell>
-              <StyledTableCell align="left">{data.credit_name}</StyledTableCell>
-              <StyledTableCell align="left">{<Selected positionName={["導演"]}/>}</StyledTableCell>
-              <StyledTableCell align="left">{<Selected positionName={["導演"]}/>}</StyledTableCell>
-              {
-                Projects.map((project, index) => {
-                  const projectData = data.projects.find((p) => p.name === project);
-                  return (
-                    <StyledTableCell
-                      key={index}
-                      align="left"
-                      sx={{
-                        whiteSpace: 'normal',
-                        wordBreak: 'break-word',
-                        padding: '8px',
-                      }}
-                    >
-                      <Tags positions={projectData?.position || []} />                    </StyledTableCell>
-                  );
-                })
-              }
-              <StyledTableCell align="left">{data.discord}</StyledTableCell>
-              <StyledTableCell align="left">{data.instagram}</StyledTableCell>
-              <StyledTableCell align="left">{data.name}</StyledTableCell>
-              <StyledTableCell align="left">{data.bank_name}</StyledTableCell>
-              <StyledTableCell align="left">{data.bank_code}</StyledTableCell>
-              <StyledTableCell align="left">{data.branch}</StyledTableCell>
-              <StyledTableCell align="left">{data.account_number}</StyledTableCell>
-              <StyledTableCell align="left">{data.SWIT_code}</StyledTableCell>
-              <StyledTableCell align="left">{data.IBAN_code}</StyledTableCell>
-              <StyledTableCell align="left">{data.address}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+      <CustomTable columns={columns} data={data} sx={{marginTop: 8}} />
     </div>
-  );
+
+  )
+
 };
 
 export default TalentPoolPage;
