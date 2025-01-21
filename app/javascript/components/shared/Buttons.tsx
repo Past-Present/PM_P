@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 
 interface ButtonsProps {
-  content: React.ReactNode;
+  content: React.ReactNode | string;
   contained?: boolean;
 }
 

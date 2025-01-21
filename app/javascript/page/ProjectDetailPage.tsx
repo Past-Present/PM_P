@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import AnnouncementPage from "../components/Projects/AnnouncementPage"
 import MemberPage from "../components/Projects/MemberPage"
+import PaymentPage from "../components/Projects/PaymentPage"
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -62,10 +63,11 @@ const ProjectDetailPage = ({ setCurrentProjectId }: { setCurrentProjectId: (id: 
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="公告" {...a11yProps(0)} />
-          <Tab label="鏡頭" {...a11yProps(1)} />
-          <Tab label="成員" {...a11yProps(2)} />
-          <Tab label="預算" {...a11yProps(3)} />
-          <Tab label="出款" {...a11yProps(4)} />
+          <Tab label="時程" {...a11yProps(1)} />
+          <Tab label="鏡頭" {...a11yProps(2)} />
+          <Tab label="成員" {...a11yProps(3)} />
+          <Tab label="預算" {...a11yProps(4)} />
+          <Tab label="出款" {...a11yProps(5)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
@@ -74,14 +76,17 @@ const ProjectDetailPage = ({ setCurrentProjectId }: { setCurrentProjectId: (id: 
       <CustomTabPanel value={value} index={1}>
         Item Two
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        <MemberPage />
-      </CustomTabPanel>
-      <CustomTabPanel value={value} index={3}>
+        <CustomTabPanel value={value} index={2}>
         Item Three
+      </CustomTabPanel>
+        <CustomTabPanel value={value} index={3}>
+        <MemberPage />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={4}>
         Item Three
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={5}>
+        <PaymentPage />
       </CustomTabPanel>
     </Box>
   );

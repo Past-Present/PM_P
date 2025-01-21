@@ -89,60 +89,68 @@ const AnnouncementPage = () => {
           padding: 2,
         }}
       >
-      {datas.map((data, index) => (
-        <Card
-          key={data.id}
-          sx={{
-            flex: '0 0 auto',
-            width: '200px',
-            marginRight: 2,
-          }}
-        >
-          <CardActionArea
-            onClick={() => setSelectedCard(data)}
-            data-active={selectedCard?.id === data.id ? '' : undefined}
-            sx={{
-              height: '100%',
-              '&[data-active]': {
-                backgroundColor: 'action.selected',
-                '&:hover': {
-                  backgroundColor: 'action.selectedHover',
-                },
-              },
-            }}
-          >
-            <CardContent
+        {
+          datas.map((data, index) => (
+            <Card
+              key={data.id}
               sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                height: 100,
+                flex: '0 0 auto',
+                width: '200px',
+                marginRight: 2,
               }}
             >
-              <Typography
-                variant="h5"
-                component="div"
+              <CardActionArea
+                onClick={() => setSelectedCard(data)}
+                data-active={selectedCard?.id === data.id ? '' : undefined}
                 sx={{
-                  overflow: 'hidden',
-                  whiteSpace: 'nowrap',
-                  textOverflow: 'ellipsis',
+                  height: '100%',
+                  '&[data-active]': {
+                    backgroundColor: 'action.selected',
+                    '&:hover': {
+                      backgroundColor: 'action.selectedHover',
+                    },
+                  },
                 }}
               >
-                {data.title}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                sx={{
-                  textOverflow: 'ellipsis',
-                  overflow: 'hidden',
-                }}
-              >
-                {data.content}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      ))}
+                <CardContent
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    padding: 1
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    sx={{
+                      overflow: 'hidden',
+                      whiteSpace: 'nowrap',
+                      textOverflow: 'ellipsis',
+                    }}
+                  >
+                    {data.title}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    color="text.secondary"
+                  >
+                    {data.created_at}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    sx={{
+                      textOverflow: 'ellipsis',
+                      overflow: 'hidden',
+                    }}
+                  >
+                    {data.content}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Card>
+          ))
+        }
       </Box>
       <Divider />
       <Box sx={{ mt: 4 }}>
@@ -150,6 +158,9 @@ const AnnouncementPage = () => {
           <Box sx={{ p: 2 }}>
             <Typography variant="h5" component="div" gutterBottom>
               {selectedCard.title}
+            </Typography>
+            <Typography variant="overline" color="text.primary">
+              {selectedCard.created_at}
             </Typography>
             <Typography variant="body1" color="text.primary">
               {selectedCard.content}
@@ -159,6 +170,9 @@ const AnnouncementPage = () => {
           <Box sx={{ p: 2 }}>
             <Typography variant="h5" component="div" gutterBottom>
               {datas[0].title}
+            </Typography>
+            <Typography variant="overline" color="text.primary">
+              {datas[0].created_at}
             </Typography>
             <Typography variant="body1" color="text.primary">
               {datas[0].content}

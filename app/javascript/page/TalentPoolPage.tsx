@@ -32,7 +32,7 @@ const TalentPoolPage = () => {
           "position": ["後製"]
         }
       ],
-        "SWIT_code": "TWNB1234",
+        "SWIFT_code": "TWNB1234",
         "IBAN_code": "TW123456789012345678",
         "address": "台北市中正區和平西路一段100號"
     },
@@ -58,7 +58,7 @@ const TalentPoolPage = () => {
           "position": ["補間"]
         }
       ],
-      "SWIT_code": "TWNB1234",
+      "SWIFT_code": "TWNB1234",
       "IBAN_code": "TW123456789012345678",
       "address": "台北市中正區和平西路一段100號"
     }
@@ -83,7 +83,7 @@ const TalentPoolPage = () => {
     bank_code: string;
     branch: string;
     account_number: string;
-    SWIT_code: string;
+    SWIFT_code: string;
     IBAN_code: string;
     address: string;
   }
@@ -117,7 +117,7 @@ const TalentPoolPage = () => {
     { label: '銀行代號', field: 'bank_code' },
     { label: '分行', field: 'branch' },
     { label: '帳號', field: 'account_number' },
-    { label: 'SWIT', field: 'SWIT_code' },
+    { label: 'SWIFT', field: 'SWIFT_code' },
     { label: 'IBAN', field: 'IBAN_code' },
     { label: '地址', field: 'address' },
   ];
