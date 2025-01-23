@@ -31,6 +31,19 @@ const names = [
   '背景',
 ];
 
+const statusNames = [
+  '準備中',
+  '可開始',
+  '進行中',
+  '待審核',
+  '退修',
+  '完成',
+  '暫停',
+  '兼用',
+  '已取消'
+]
+
+
 // 定義選項對應的背景顏色
 const backgroundColors: { [key: string]: string } = {
   '導演': '#ffe0b2',
@@ -45,31 +58,36 @@ const backgroundColors: { [key: string]: string } = {
   '背景': '#f8bbd0',
 };
 
-interface PositionProps {
-  positionName?: string[];
+interface OptionProps {
+  options?: string[]; // 動態傳入選項陣列
+  isPosition?: boolean; // 可選的類型，如果傳了 options，就忽略 type
+  value: string | string[]; // 當前選中的值
+  onChange?: (value: string) => void;
+  isMultiple?: boolean
 }
 
-const MultipleSelectChip = ({ positionName }: PositionProps) => {
+const MultipleSelectChip = ({ options, isPosition = true, value, onChange, isMultiple = true }: OptionProps) => {
   const theme = useTheme();
-  const [position, setPosition] = useState<string[]>(positionName || []);
+  const [option, setOption] = useState<string[] | string>(value || []);
 
-  const handleChange = (event: SelectChangeEvent<typeof position>) => {
+  const handleChange = (event: SelectChangeEvent<typeof option>) => {
     const {
       target: { value },
     } = event;
-    setPosition(
+    setOption(
       typeof value === 'string' ? value.split(',') : value,
     );
   };
 
+  const selectOptions = isPosition ? names : options ? options : statusNames
   return (
     <div>
-      <FormControl sx={{ m: 1, minWidth: 200, maxWidth: 400 }}>
+      <FormControl sx={{ m: 1 }}>
         <Select
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
-          multiple
-          value={position}
+          multiple={isMultiple}
+          value={option}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" />}
           renderValue={(selected) => (
@@ -88,14 +106,16 @@ const MultipleSelectChip = ({ positionName }: PositionProps) => {
           )}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-            >
-              {name}
-            </MenuItem>
-          ))}
+          {
+            selectOptions.map((name) => (
+              <MenuItem
+                key={name}
+                value={name}
+              >
+                {name}
+              </MenuItem>
+            ))
+          }
         </Select>
       </FormControl>
     </div>

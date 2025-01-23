@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import Buttons from "../Shared/Buttons"
 
-const PaymentTab = () => {
+const PaymentPage = ({ projectName }: { projectName: string | undefined }) => {
   const [paymentDate, setPaymentDate] = useState('');
   const [totalAmount, setTotalAmount] = useState(66000); // 假設總金額
 
@@ -109,7 +109,7 @@ const PaymentTab = () => {
   return (
     <Box sx={{ padding: 4 }}>
       <Typography variant="h4" align="center" gutterBottom>
-        專案A 出款單
+        {projectName} 出款單
       </Typography>
       <Box
         sx={{
@@ -209,4 +209,4 @@ const PaymentTab = () => {
   );
 };
 
-export default PaymentTab;
+export default PaymentPage;

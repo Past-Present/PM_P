@@ -6,7 +6,8 @@ import Box from '@mui/material/Box';
 import AnnouncementPage from "../components/Projects/AnnouncementPage"
 import MemberPage from "../components/Projects/MemberPage"
 import PaymentPage from "../components/Projects/PaymentPage"
-
+import ShotPage from "../components/Projects/ShotPage"
+import BudgetPage from '@/components/Projects/BudgetPage';
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -43,21 +44,11 @@ const ProjectDetailPage = ({ setCurrentProjectId }: { setCurrentProjectId: (id: 
       setCurrentProjectId(id);
     }
   }, [id, setCurrentProjectId]);
-  const [project, setProject] = useState<{ id: string; name: string } | null>(null);
-
-  const projectData = [
-    { id: '1', name: '專案A', details: '這是專案A的詳細資料' },
-    { id: '2', name: '專案B', details: '這是專案B的詳細資料' },
-    { id: '3', name: '專案C', details: '這是專案C的詳細資料' },
-  ];
-
-
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
-
   return (
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -74,19 +65,19 @@ const ProjectDetailPage = ({ setCurrentProjectId }: { setCurrentProjectId: (id: 
         <AnnouncementPage />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
+        {id}
       </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-        Item Three
+        <ShotPage />
       </CustomTabPanel>
         <CustomTabPanel value={value} index={3}>
         <MemberPage />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={4}>
-        Item Three
+        <BudgetPage />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={5}>
-        <PaymentPage />
+        <PaymentPage projectName={id} />
       </CustomTabPanel>
     </Box>
   );

@@ -8,7 +8,7 @@ import Buttons from "../Shared/Buttons";
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
 
-const MamberPage = () => {
+const MemberPage = () => {
   const data = [
     {
       "id": "1",
@@ -75,4 +75,4 @@ const MamberPage = () => {
 
 };
 
-export default MamberPage;
+export default MemberPage;
