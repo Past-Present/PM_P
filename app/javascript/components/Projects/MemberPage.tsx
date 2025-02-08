@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CustomTable from './CustomTable';
 import Selected from '../Shared/Selected';
 import Tags from '../Shared/Tags';
@@ -7,8 +7,13 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Buttons from "../Shared/Buttons";
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
+import MemberDialog from '../Shared/Dialogs/MemberDialog';
 
 const MemberPage = () => {
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
   const data = [
     {
       "id": "1",
@@ -58,6 +63,7 @@ const MemberPage = () => {
   return (
     <div>
       <div style={{ position: 'fixed', right: '3rem', top: '161px' }}>
+        <MemberDialog open={open} onClose={handleClose} />
         <Buttons
           content={
             <>
@@ -66,6 +72,7 @@ const MemberPage = () => {
             </>
           }
           contained={true}
+          onClick={() => setOpen(true)}
         />
       </div>
       <CustomTable columns={columns} data={data} sx={{marginTop: 8}} />

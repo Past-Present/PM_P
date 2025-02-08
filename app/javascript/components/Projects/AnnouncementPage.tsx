@@ -7,8 +7,10 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
 import Divider from '@mui/material/Divider';
+import AnnouncementDialog from "../Shared/Dialogs/AnnouncementDialog";
 
 const AnnouncementPage = () => {
+  const [open, setOpen] = useState(false);
   const datas = [
     {
       id: 1,
@@ -66,6 +68,7 @@ const AnnouncementPage = () => {
 
   return (
     <div>
+      <AnnouncementDialog open={open} onClose={() => setOpen(false)} />
       <div className="flex justify-end">
         <Buttons
           content={
@@ -75,6 +78,7 @@ const AnnouncementPage = () => {
             </>
           }
           contained={true}
+          onClick={() => setOpen(true)}
         />
       </div>
       <Box

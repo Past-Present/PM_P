@@ -90,9 +90,9 @@ const MultipleSelectChip = ({ options, isPosition = true, value, onChange, isMul
           value={option}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" />}
-          renderValue={(selected) => (
+          renderValue={(selected: string | string[]) => (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-              {selected.map((value) => (
+              {(typeof selected === 'string' ? [selected] : selected).map((value: string) => (
                 <Chip
                   key={value}
                   label={value}

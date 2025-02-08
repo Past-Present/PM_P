@@ -3,11 +3,14 @@ import {
   Box,
   Typography,
   TextField,
-  Button,
   Divider,
   Grid,
   IconButton,
 } from "@mui/material";
+import Buttons from "../Shared/Buttons";
+import AddIcon from '@mui/icons-material/Add';
+
+
 import { ArrowUpward, ArrowDownward } from "@mui/icons-material";
 
 const BudgetPage = () => {
@@ -29,8 +32,8 @@ const BudgetPage = () => {
     },
   ]);
 
-  const calculateTotal = (items) => {
-    return items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const calculateTotal = (items: { price: number, quantity: number }[]) => {
+    return items.reduce((sum: number, item: { price: number, quantity: number }) => sum + item.price * item.quantity, 0);
   };
 
   const calculateRemainingBudget = () => {
@@ -50,19 +53,19 @@ const BudgetPage = () => {
     ]);
   };
 
-  const handleTaskNameChange = (index, newName) => {
+  const handleTaskNameChange = (index: number, newName: string) => {
     const updatedTasks = [...tasks];
     updatedTasks[index].name = newName;
     setTasks(updatedTasks);
   };
 
-  const handleTaskBudgetChange = (index, newBudget) => {
+  const handleTaskBudgetChange = (index: number, newBudget: string) => {
     const updatedTasks = [...tasks];
     updatedTasks[index].budget = Number(newBudget);
     setTasks(updatedTasks);
   };
 
-  const handleAddItem = (taskIndex) => {
+  const handleAddItem = (taskIndex: number) => {
     const updatedTasks = [...tasks];
     const currentItems = updatedTasks[taskIndex].items;
     if (currentItems.length < 10) {
@@ -76,9 +79,9 @@ const BudgetPage = () => {
     }
   };
 
-  const handleItemPriceChange = (taskIndex, itemIndex, newPrice) => {
+  const handleItemPriceChange = (index: number, itemIndex: number, newPrice: string) => {
     const updatedTasks = [...tasks];
-    updatedTasks[taskIndex].items[itemIndex].price = Number(newPrice);
+    updatedTasks[index].items[itemIndex].price = Number(newPrice);
     setTasks(updatedTasks);
   };
 
@@ -103,10 +106,17 @@ const BudgetPage = () => {
           </Grid>
         </Grid>
       </Box>
+      <Buttons
+        content={
+          <>
+            <AddIcon sx={{marginLeft: '-0.25rem'}} />
+            新增工作項目
+          </>
+        }
+        contained={true}
+        onClick={handleAddTask}
+      />
 
-      <Button variant="contained" onClick={handleAddTask}>
-        + 新增工作項目
-      </Button>
 
       {tasks.map((task, index) => (
         <Box key={index} mt={4}>
@@ -167,13 +177,16 @@ const BudgetPage = () => {
             </Grid>
           ))}
           {task.items.length < 10 && (
-            <Button
-              variant="text"
+            <Buttons
+              content={
+                <>
+                  <AddIcon sx={{marginLeft: '-0.25rem'}} />
+                  新增報價項目
+                </>
+              }
+              contained={true}
               onClick={() => handleAddItem(index)}
-              sx={{ mt: 2 }}
-            >
-              + 新增報價項目
-            </Button>
+            />
           )}
           <Divider sx={{ mt: 2 }} />
         </Box>

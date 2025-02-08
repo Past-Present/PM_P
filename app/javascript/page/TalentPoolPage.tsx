@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CustomTable from '../components/Projects/CustomTable';
 import Selected from '../components/Shared/Selected';
 import Tags from '../components/Shared/Tags';
@@ -7,8 +7,12 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Buttons from "../components/Shared/Buttons";
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
-
+import MemberDialog from '../components/Shared/Dialogs/MemberDialog';
 const TalentPoolPage = () => {
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
   const data = [
     {
       "id": "1",
@@ -125,6 +129,7 @@ const TalentPoolPage = () => {
   return (
     <div>
       <div style={{ position: 'fixed', right: '1.5rem', top: '5.5rem' }}>
+        <MemberDialog open={open} onClose={handleClose} isFullInfo={true} />
         <Buttons
           content={
             <>
@@ -133,6 +138,7 @@ const TalentPoolPage = () => {
             </>
           }
           contained={true}
+          onClick={() => setOpen(true)}
         />
       {/* <CustomTable columns={columns} data={data} />; */}
       </div>
