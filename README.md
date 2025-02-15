@@ -1,24 +1,38 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 📌 專案簡介
+**PM_P** 是一款專為 **動畫專案經理（PM）** 打造的專案管理工具，幫助 PM 管理專案、追蹤任務進度、協作團隊成員。
+目前 **前端 UI 開發約完成 80%（React + MUI），後端 API 尚未開發**，未來將整合 **Ruby on Rails** 作為後端服務。
 
-Things you may want to cover:
+🔹 **當前進度：**
+✅ **前端 UI 開發（80%）** - 主要頁面已完成，部分功能尚待補充
+✅ **響應式設計（RWD）** - 桌機版完成，手機版優化中
+🔄 **後端 API（開發中）**
+🔄 **資料存儲 & 用戶認證（開發中）**
 
-* Ruby version
 
-* System dependencies
+📌 這個網站的核心功能，都是為了 PM 設計：
 
-* Configuration
+🛠 主要功能（針對 PM 設計）
+ 📂 專案管理：PM 可以建立、編輯、刪除專案，並追蹤進度
+ 👥 團隊管理：PM 可以新增、管理團隊成員，指派不同角色與權限（動畫師、構圖師等）
+ 📑 任務管理：PM 可以為專案建立細分任務，並指派給團隊成員
+ 🔄 進度追蹤：團隊成員可以回報進度，PM 可隨時查看更新
 
-* Database creation
+## 🔧 開發工具
 
-* Database initialization
+- 前端框架：React.js
+- 樣式庫：MUI + Tailwind CSS
+- 後端框架：Ruby on Rails
+- 資料庫：PostgreSQL
+- 版本控制：Git
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 📌 TODO（未來開發計畫）
+📝 目前規劃中的新功能：
+- [ ] **專案細節編輯功能**
+- [ ] **專案時程頁面功能**
+- [ ] **後端 API 開發（Ruby on Rails）**
+- [ ] **使用者註冊 / 登入系統**
+- [ ] **專案任務的 API 串接**
+- [ ] **團隊成員管理 API**
+- [ ] **資料存儲（PostgreSQL）**

@@ -4,7 +4,14 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import Divider from '@mui/material/Divider';
 import Buttons from '../Buttons';
+import Selected from '../Selected';
+
 
 interface MemberDialogProps {
   open: boolean;
@@ -28,6 +35,10 @@ const MemberDialog: React.FC<MemberDialogProps> = ({ open, onClose, isFullInfo =
   const [swiftCode, setSwiftCode] = useState('');
   const [ibanCode, setIbanCode] = useState('');
   const [address, setAddress] = useState('');
+  const [suggestedPosition, setSuggestedPosition] = useState<string[]>([]);
+  const [hopePosition, setHopePosition] = useState<string[]>([]);
+
+  const [selectedTalentPool, setSelectedTalentPool] = useState("");
 
   const handleClose = () => {
     setName('');
@@ -45,12 +56,44 @@ const MemberDialog: React.FC<MemberDialogProps> = ({ open, onClose, isFullInfo =
     setSwiftCode('');
     setIbanCode('');
     setAddress('');
+    setSuggestedPosition([]);
+    setHopePosition([]);
     onClose();
   };
+
+  const talentPoolInfo = [
+    { id: 1, name: '張小明' },
+    { id: 2, name: '李大明' },
+    { id: 3, name: '王小明' },
+  ]
 
   return (
     <Dialog open={open} onClose={handleClose}>
       <DialogTitle>新增成員</DialogTitle>
+      {
+        !isFullInfo && (
+        <div className='flex justify-between flex-col px-6'>
+          <FormControl fullWidth sx={{ marginBottom: 2 }}>
+            <InputLabel>現成人力</InputLabel>
+            <Select
+              label="現成人力"
+              value={selectedTalentPool}
+              onChange={(e) => {
+                setSelectedTalentPool(e.target.value);
+              }}
+              fullWidth
+            >
+              {
+                talentPoolInfo.map((info) => (
+                  <MenuItem key={info.id} value={info.id}>{info.name}</MenuItem>
+                ))
+              }
+            </Select>
+          </FormControl>
+          <Divider>或</Divider>
+        </div>
+        )
+      }
       <DialogContent>
         <TextField
           autoFocus
@@ -89,6 +132,27 @@ const MemberDialog: React.FC<MemberDialogProps> = ({ open, onClose, isFullInfo =
           value={role}
           onChange={(e) => setRole(e.target.value)}
         />
+          {/* <FormControl fullWidth>
+            <InputLabel id="suggested-position-label" sx={{ margin: '8px 0px 4px 0px' }}>建議職位</InputLabel>
+            <Selected
+              label="suggested-position-label"
+              options={["導演", "構圖", "美術", "原畫", "動畫", "補間", "上色", "音樂", "後製", "背景"]}
+              value={suggestedPosition}
+              isMultiple={true}
+              onChange={(value: string) =>      setSuggestedPosition([value])}
+              sx={{ margin: '8px 0px 4px 0px', width: '100%' }}
+            />
+          </FormControl>
+          <FormControl fullWidth>
+            <InputLabel sx={{ margin: '8px 0px 4px 0px' }}>期望職位</InputLabel>
+            <Selected
+              options={["導演", "構圖", "美術", "原畫", "動畫", "補間", "上色", "音樂", "後製", "背景"]}
+              value={hopePosition}
+              isMultiple={true}
+              onChange={(value: string) => setHopePosition([value])}
+              sx={{ margin: '8px 0px 4px 0px', width: '100%' }}
+            />
+          </FormControl> */}
         {isFullInfo && (
           <>
             <TextField

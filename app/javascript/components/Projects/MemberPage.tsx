@@ -21,7 +21,7 @@ const MemberPage = () => {
       "credit_name": "Xiao Ming Chang",
       "discord": "asdfg",
       "instagram": "afds",
-      "position": ["動畫製作師"],
+      "position": ["動畫"],
     },
     {
       "id": "2",
@@ -29,7 +29,7 @@ const MemberPage = () => {
       "credit_name": "Xiao Ming Chang",
       "discord": "asdfg",
       "instagram": "afds",
-      "position": ["動畫製作師"],
+      "position": ["上色"],
     }
   ]
 

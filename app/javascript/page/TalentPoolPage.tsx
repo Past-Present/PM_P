@@ -25,7 +25,8 @@ const TalentPoolPage = () => {
       "discord": "asdfg",
       "instagram": "afds",
       "account_number": "123456789012",
-      "position": "動畫製作師",
+      "suggested_position": ["動畫", "上色"],
+      "hope_position": ["構圖", "動畫"],
       "projects": [
         {
           "name": "專案A",
@@ -42,16 +43,17 @@ const TalentPoolPage = () => {
     },
     {
       "id": "2",
-      "name": "張小明",
-      "credit_name": "Xiao Ming Chang",
-      "account_name": "張小明",
+      "name": "李大明",
+      "credit_name": "Da Ming Li",
+      "account_name": "李大明",
       "bank_name": "台灣銀行",
       "bank_code": "004",
       "branch": "台北分行",
       "discord": "asdfg",
       "instagram": "afds",
       "account_number": "123456789012",
-      "position": "動畫製作師",
+      "suggested_position": ["動畫"],
+      "hope_position": ["構圖", "動畫"],
       "projects": [
         {
           "name": "專案A",
@@ -60,6 +62,29 @@ const TalentPoolPage = () => {
         {
           "name": "專案B",
           "position": ["補間"]
+        }
+      ],
+      "SWIFT_code": "TWNB1234",
+      "IBAN_code": "TW123456789012345678",
+      "address": "台北市中正區和平西路一段100號"
+    },
+    {
+      "id": "3",
+      "name": "王小明",
+      "credit_name": "Xiao Ming Wang",
+      "account_name": "王小明",
+      "bank_name": "台灣銀行",
+      "bank_code": "004",
+      "branch": "台北分行",
+      "discord": "asdfg",
+      "instagram": "afds",
+      "account_number": "123456789012",
+      "suggested_position": ["動畫"],
+      "hope_position": ["構圖", "動畫"],
+      "projects": [
+        {
+          "name": "專案A",
+          "position": ["動畫"]
         }
       ],
       "SWIFT_code": "TWNB1234",
@@ -81,6 +106,8 @@ const TalentPoolPage = () => {
     credit_name: string;
     discord: string;
     instagram: string;
+    suggested_position: string[];
+    hope_position: string[];
     projects: Project[];
     account_name: string;
     bank_name: string;
@@ -105,8 +132,8 @@ const TalentPoolPage = () => {
     },
     { label: '姓名', field: 'name' },
     { label: 'Credit 顯示姓名', field: 'credit_name' },
-    { label: '建議職位', render: () => <Selected positionName={["導演"]} /> },
-    { label: '期望職位', render: () => <Selected positionName={["導演"]} /> },
+    { label: '建議職位', field: 'suggested_position', render: (row: TalentData) => <Selected value={row.suggested_position} /> },
+    { label: '期望職位', field: 'hope_position', render: (row: TalentData) => <Selected value={row.hope_position} /> },
     ...projects.map((project) => ({
       label: project,
       render: (row: TalentData) => {

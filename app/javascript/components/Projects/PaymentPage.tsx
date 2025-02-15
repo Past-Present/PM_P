@@ -101,6 +101,64 @@ const PaymentPage = ({ projectName }: { projectName: string | undefined }) => {
           ]
         }
       ]
+    },
+    {
+      "id": 2,
+      "name": "李大明",
+      "email": "daming@example.com",
+      "phone": '222222222',
+      "discord": "daming#1234",
+      "instagram": "daming_art",
+      "credit_name": "Daming Li",
+      "address": "台北市中正區和平西路一段100號",
+      "account_name": "李大明",
+      "bank_name": "台灣銀行",
+      "bank_code": "004",
+      "branch": "台北分行",
+      "account_number": "123456789012",
+      "SWIFT_code": "TWNB1234",
+      "IBAN_code": "TW123456789012345678",
+      "project": {
+        "id": 1,
+        "name_tw": "專案A",
+        "name_en": "Project A",
+        "artist_roles": [
+          {
+            "work_item_id": 1,
+            "work_item_name": "動畫",
+            "unit": "秒"
+          },
+          {
+            "work_item_id": 2,
+            "work_item_name": "上色",
+            "unit": "張"
+          }
+        ]
+      },
+      "tasks": [
+        {
+          "id": 1,
+          "work_item_name": "動畫",
+          "status": "completed",
+          "frames": 120,
+          "shots": [
+            {
+              "shot_id": 1,
+              "shot_number": 1,
+              "frames": 60,
+              "difficulty": 5,
+              "price": 3000,
+            },
+            {
+              "shot_id": 2,
+              "shot_number": 2,
+              "frames": 60,
+              "difficulty": 3,
+              "price": 2000,
+            }
+          ]
+        }
+      ]
     }
   ];
 

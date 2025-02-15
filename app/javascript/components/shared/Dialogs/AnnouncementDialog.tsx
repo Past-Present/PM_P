@@ -39,6 +39,8 @@ const AnnouncementDialog: React.FC<AnnouncementDialogProps> = ({ open, onClose }
         <TextField
           margin="dense"
           id="content"
+          multiline={true}
+          rows={10}
           label="內容"
           type="text"
           fullWidth

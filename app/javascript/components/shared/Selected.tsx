@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Theme, useTheme } from '@mui/material/styles';
+import { SxProps, Theme, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import MenuItem from '@mui/material/MenuItem';
@@ -64,9 +64,11 @@ interface OptionProps {
   value: string | string[]; // 當前選中的值
   onChange?: (value: string) => void;
   isMultiple?: boolean
+  sx?: SxProps
+  label?: string
 }
 
-const MultipleSelectChip = ({ options, isPosition = true, value, onChange, isMultiple = true }: OptionProps) => {
+const MultipleSelectChip = ({ options, isPosition = true, value, onChange, isMultiple = true, sx, label }: OptionProps) => {
   const theme = useTheme();
   const [option, setOption] = useState<string[] | string>(value || []);
 
@@ -82,9 +84,9 @@ const MultipleSelectChip = ({ options, isPosition = true, value, onChange, isMul
   const selectOptions = isPosition ? names : options ? options : statusNames
   return (
     <div>
-      <FormControl sx={{ m: 1 }}>
+      <FormControl sx={{ m: 1, ...sx }}>
         <Select
-          labelId="demo-multiple-chip-label"
+          labelId={label}
           id="demo-multiple-chip"
           multiple={isMultiple}
           value={option}
