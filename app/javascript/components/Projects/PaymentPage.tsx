@@ -13,6 +13,8 @@ import {
   Select,
   MenuItem,
   Button,
+  FormControl,
+  InputLabel,
 } from '@mui/material';
 import Buttons from "../Shared/Buttons"
 
@@ -181,20 +183,24 @@ const PaymentPage = ({ projectName }: { projectName: string | undefined }) => {
       >
         <Box>
           <Typography>藝術家</Typography>
-          <Select
-            value={selectedArtist.id}
-            onChange={(e) => {
-              const artist = datas.find((artist) => artist.id === e.target.value);
-              setSelectedArtist(artist);
-            }}
-            fullWidth
-          >
-            {datas.map((artist) => (
-              <MenuItem key={artist.id} value={artist.id}>
-                {artist.name}
-              </MenuItem>
-            ))}
-          </Select>
+          <FormControl fullWidth>
+            <InputLabel id="artist-select-label">藝術家</InputLabel>
+            <Select
+              labelId="artist-select-label"
+              label="藝術家"
+              value={selectedArtist.id}
+              onChange={(e) => {
+                const artist = datas.find((artist) => artist.id === e.target.value);
+                setSelectedArtist(artist);
+              }}
+            >
+              {datas.map((artist) => (
+                <MenuItem key={artist.id} value={artist.id}>
+                  {artist.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Box>
         <Box>
           <Typography>出款日</Typography>

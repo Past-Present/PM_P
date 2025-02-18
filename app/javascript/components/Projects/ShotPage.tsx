@@ -11,6 +11,11 @@ import FilterDialog from '../Shared/Dialogs/FilterDialog';
 
 const ShotPage = () => {
   const [open, setOpen] = useState(false);
+  const [artist, setArtist] = useState("");
+  const [option, setOption] = useState<string>("");
+  const [options, setOptions] = useState<string[]>([]);
+  const [label, setLabel] = useState<string>("");
+  const [showArtist, setShowArtist] = useState<boolean>(false);
   const data = [
     {
       "id": 1,
@@ -58,21 +63,45 @@ const ShotPage = () => {
     {
       label:
         <div className='flex items-center'>
-      優先度<IconButton sx={{ color: 'white'}} onClick={() => setOpen(true)}><FilterAltIcon /></IconButton>
-      </div>,
+        優先度
+        <IconButton
+          sx={{ color: 'white'}}
+          onClick={() => {
+            setOpen(true);
+            setOptions([...Array(5)].map((_, i) => (i + 1).toString()));
+            setLabel("優先度");
+          }}
+        >
+          <FilterAltIcon />
+        </IconButton>
+        </div>,
       field: 'priority' as const
     },
     {
       label:
         <div className='flex items-center'>
-      難易度<IconButton sx={{ color: 'white'}} onClick={() => setOpen(true)}><FilterAltIcon /></IconButton>
+      難易度
+      <IconButton
+          sx={{ color: 'white'}}
+          onClick={() => {
+            setOpen(true);
+            setOptions([...Array(5)].map((_, i) => (i + 1).toString()));
+            setLabel("難易度");
+          }}><FilterAltIcon /></IconButton>
       </div>,
       field: 'difficulty' as const
     },
     { label: '上傳', field: 'update' as const },
     { label:
       <div className='flex items-center'>
-        構圖｜2/33｜2% <IconButton sx={{ color: 'white'}} onClick={() => setOpen(true)}><FilterAltIcon /></IconButton>
+        構圖｜2/33｜2% <IconButton
+          sx={{ color: 'white'}}
+          onClick={() => {
+            setOpen(true);
+            setOptions(['準備中', '可開始', '進行中', '待審核', '退修' ,'完成']);
+            setLabel("狀態");
+            setShowArtist(true);
+          }}><FilterAltIcon /></IconButton>
         </div>,
       render: () =>
         <div className='flex'>
@@ -92,7 +121,12 @@ const ShotPage = () => {
     {
       label:
         <div className='flex items-center'>
-          動畫｜2/33｜2% <IconButton sx={{ color: 'white'}} onClick={() => setOpen(true)}><FilterAltIcon /></IconButton>
+          動畫｜2/33｜2% <IconButton sx={{ color: 'white'}} onClick={() => {
+            setOpen(true);
+            setShowArtist(true);
+            setOptions(['準備中', '可開始', '進行中', '待審核', '退修' ,'完成']);
+            setLabel("狀態");
+          }}><FilterAltIcon /></IconButton>
         </div>,
       render: () =>
         <div className='flex'>
@@ -114,7 +148,17 @@ const ShotPage = () => {
 
   return (
     <div>
-      <FilterDialog open={open} onClose={() => setOpen(false)} />
+      <FilterDialog
+        open={open}
+        onClose={() => setOpen(false)}
+        options={options}
+        option={option}
+        setOption={setOption}
+        artist={artist}
+        setArtist={setArtist}
+        label={label}
+        showArtist={showArtist}
+      />
       <div style={{ position: 'fixed', right: '3rem', top: '161px' }}>
         <Buttons
           content={
